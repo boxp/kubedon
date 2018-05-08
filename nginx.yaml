@@ -94,15 +94,12 @@ apiVersion: v1
 metadata:
   name: nginx
 spec:
-  type: LoadBalancer
-  loadBalancerIP: "130.211.71.249"
+  type: NodePort
   ports:
   - name: http
     port: 80
     targetPort: http
-  - name: https
-    port: 443
-    targetPort: https
+    protocol: TCP
   selector:
     name: nginx
 
