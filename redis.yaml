@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: redis-volume
+  name: mstdn-redis-volume
 spec:
   accessModes:
   - ReadWriteOnce
@@ -14,11 +14,11 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: redis
+  name: mstdn-redis
 spec:
   type: ClusterIP
   selector:
-    name: redis
+    name: mstdn-redis
   ports:
   - port: 6379
     targetPort: redis
@@ -28,13 +28,13 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: redis
+  name: mstdn-redis
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: redis
+        name: mstdn-redis
     spec:
       containers:
       - name: redis
@@ -53,4 +53,4 @@ spec:
       volumes:
       - name: redis-data
         persistentVolumeClaim:
-          claimName: redis-volume
+          claimName: mstdn-redis-volume

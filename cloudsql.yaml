@@ -1,28 +1,28 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: cloudsql
+  name: mstdn-cloudsql
 spec:
   type: ClusterIP
   selector:
-    name: cloudsql
+    name: mstdn-cloudsql
   ports:
-  - name: cloudsql
+  - name: mstdn-cloudsql
     port: 5432
-    targetPort: cloudsql
+    targetPort: mstdn-cloudsql
 
 ---
 
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: cloudsql
+  name: mstdn-cloudsql
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: cloudsql
+        name: mstdn-cloudsql
     spec:
       containers:
       - name: cloudsql-proxy
@@ -31,13 +31,13 @@ spec:
                   "-instances=$(INSTANCE_CONNECTION_NAME)=tcp:0.0.0.0:5432",
                   "-credential_file=/secrets/cloudsql/credentials.json"]
         ports:
-        - name: cloudsql
+        - name: mstdn-cloudsql
           containerPort: 5432
         env:
         - name: INSTANCE_CONNECTION_NAME
           valueFrom:
             secretKeyRef:
-              name: cloudsql-secrets
+              name: mastodon-cloudsql-secrets
               key: instance_connection_name
         volumeMounts:
         - name: cloudsql-secrets
@@ -54,7 +54,7 @@ spec:
       volumes:
       - name: cloudsql-secrets
         secret:
-          secretName: cloudsql-secrets
+          secretName: mastodon-cloudsql-secrets
           items:
           - key: credentials.json
             path: credentials.json

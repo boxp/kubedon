@@ -4,9 +4,9 @@ metadata:
   name: mastodon-config
 data:
   # Service dependencies
-  REDIS_HOST: redis
+  REDIS_HOST: mstdn-redis
   REDIS_PORT: "6379"
-  DB_HOST: cloudsql
+  DB_HOST: mstdn-cloudsql
   # DB_USER: postgres
   DB_NAME: mastodon
   # DB_PASS:
@@ -36,14 +36,10 @@ data:
   # E-mail configuration
   # Note: Mailgun and SparkPost (https://sparkpo.st/smtp) each have good free tiers
   # SMTP_SERVER:
-  # SMTP_PORT: "587"
+  # SMTP_PORT: "2525"
   # SMTP_LOGIN:
   # SMTP_PASSWORD:
   # SMTP_FROM_ADDRESS:
-  # SMTP_DOMAIN:
-  SMTP_AUTH_METHOD: plain
-  SMTP_OPENSSL_VERIFY_MODE: peer
-  SMTP_ENABLE_STARTTLS_AUTO: "true"
 
   # Optional asset host for multi-server setups
   # CDN_HOST: assets.example.com
@@ -58,14 +54,14 @@ data:
   # S3_HOSTNAME: 192.168.1.123:9000
 
   # S3 (Minio Config (optional) Please check Minio instance for details)
-  # S3_ENABLED: "true"
-  # S3_BUCKET:
+  S3_ENABLED: "true"
+  S3_BUCKET: mastodon-prod
   # AWS_ACCESS_KEY_ID:
   # AWS_SECRET_ACCESS_KEY:
-  # S3_REGION:
-  # S3_PROTOCOL: https
-  # S3_HOSTNAME: storage.googleapis.com
-  # S3_ENDPOINT: https://storage.googleapis.com
+  S3_REGION: asia
+  S3_PROTOCOL: https
+  S3_HOSTNAME: storage.googleapis.com
+  S3_ENDPOINT: https://storage.googleapis.com
 
   # Optional alias for S3 if you want to use Cloudfront or Cloudflare in front
   # S3_CLOUDFRONT_HOST:
