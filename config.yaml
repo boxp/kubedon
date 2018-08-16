@@ -62,6 +62,8 @@ data:
   S3_PROTOCOL: https
   S3_HOSTNAME: storage.googleapis.com
   S3_ENDPOINT: https://storage.googleapis.com
+  # http://zattonaka.blogspot.com/2018/06/s3-aws-cli-provided-security.html
+  S3_SIGNATURE_VERSION: s3
 
   # Optional alias for S3 if you want to use Cloudfront or Cloudflare in front
   # S3_CLOUDFRONT_HOST:
