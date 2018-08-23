@@ -20,7 +20,7 @@ kind: Deployment
 metadata:
   name: mastodon
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -33,6 +33,11 @@ spec:
         ports:
         - name: web
           containerPort: 3000
+        readinessProbe:
+          tcpSocket:
+            port: 3000
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
         envFrom:
         - configMapRef:
             name: mastodon-config
@@ -43,7 +48,7 @@ spec:
             memory: 350Mi
             cpu: 100m
       - name: streaming
-        image: gargron/mastodon:v2.4.3
+        image: gargron/mastodon:v2.4.4
         command: ["npm", "run", "start"]
         ports:
         - name: streaming
@@ -65,7 +70,7 @@ kind: Deployment
 metadata:
   name: sidekiq
 spec:
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
