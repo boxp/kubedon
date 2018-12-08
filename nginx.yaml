@@ -36,7 +36,7 @@ data:
       gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
 
       add_header Strict-Transport-Security "max-age=31536000" always;
-      add_header Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' wss://${LOCAL_DOMAIN} data: blob:; img-src 'self' https://${LOCAL_DOMAIN} https://storage.googleapis.com data: blob:; media-src 'self' https://storage.googleapis.com; font-src 'self'";
+      # add_header Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' wss://${LOCAL_DOMAIN} data: blob:; img-src 'self' https://${LOCAL_DOMAIN} https://storage.googleapis.com data: blob:; media-src 'self' https://storage.googleapis.com; font-src 'self'";
       add_header Referrer-Policy "same-origin";
 
       location / {
