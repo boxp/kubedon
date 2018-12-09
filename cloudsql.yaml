@@ -18,12 +18,22 @@ kind: Deployment
 metadata:
   name: mstdn-cloudsql
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
         name: mstdn-cloudsql
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - mstdn-cloudsql
+            topologyKey: "kubernetes.io/hostname"
       containers:
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.09

@@ -108,6 +108,16 @@ spec:
       labels:
         name: mstdn-nginx
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - mstdn-nginx
+            topologyKey: "kubernetes.io/hostname"
       volumes:
       - name: nginx-conf
         configMap:

@@ -26,6 +26,16 @@ spec:
       labels:
         name: mastodon
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - mastodon
+            topologyKey: "kubernetes.io/hostname"
       containers:
       - name: web
         image: tootsuite/mastodon:v2.6.1
