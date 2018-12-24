@@ -38,7 +38,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
       - name: web
-        image: tootsuite/mastodon:v2.6.1
+        image: tootsuite/mastodon:v2.6.5
         command: ["/bin/ash", "-c", "bundle exec rails s -p 3000 -b 0.0.0.0"]
         ports:
         - name: web
@@ -58,7 +58,7 @@ spec:
             memory: 350Mi
             cpu: 100m
       - name: streaming
-        image: tootsuite/mastodon:v2.6.1
+        image: tootsuite/mastodon:v2.6.5
         command: ["yarn", "start"]
         ports:
         - name: streaming
@@ -89,7 +89,7 @@ spec:
       containers:
       - name: sidekiq
         command: ["/bin/ash", "-c", "echo \"${CAFILE_RB}\" > config/initializers/cafile.rb && bundle exec sidekiq -q default -q mailers -q pull -q push"]
-        image: tootsuite/mastodon:v2.6.1
+        image: tootsuite/mastodon:v2.6.5
         resources:
           requests:
             memory: 128Mi
